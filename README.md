@@ -27,10 +27,10 @@ var MentionCompleter = require('mention-completer')
 
 var completer = new MentionCompleter({
   patterns: { handle: /(@[\w]+)\b/, hashtag: /(\#[\w]+\b/ },
-  getSelectionRange: ,
-  setSelectionRange: ,
-  getValue: ,
-  setValue: 
+  getSelectionRange: function() { },
+  setSelectionRange: function() { },
+  getValue: function() { },
+  setValue: function() { }
 })
   
 completer
