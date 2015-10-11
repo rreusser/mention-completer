@@ -2,7 +2,7 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
-> A manager for platform-independent mention completion
+> A platform-independent library for managing mention-like completion
 
 ## Introduction
 
