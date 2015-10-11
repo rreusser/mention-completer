@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="../dist/bundle.js"></script>
+  <script>
+    $(function() {
+
+      var currentMatch
+      var $input = $('#input')
+
+      var completer = new MentionCompleter({
+        patterns: {
+          username: /(@[\w]+)\b/,
+          hashtag: /(#[\w]+)\b/
+        },
+        getValue: function(cb) {
+          cb(null, $input.val())
+        },
+        setValue: function(value) {
+          $input.focus()
+          $input.val(value)
+          $input.trigger('keyup')
+        },
+        getSelectionRange: function(cb) {
+          cb(null, {start: $input[0].selectionStart, end: $input[0].selectionEnd})
+        },
+        setSelectionRange: function(range) {
+          $input[0].setSelectionRange(range.start, range.end)
+        }
+      })
+
+      $input.on('keyup', completer.checkForMatch.bind(completer) )
+
+      completer
+        .on('match',function(match) {
+          currentMatch = match
+          $('#match').text(match.value)
+          $('#matchtype').text(match.type)
+          createCompletions()
+        })
+        .on('nomatch',function() {
+          currentMatch = null
+          $('#match').text('')
+          $('#matchtype').text('')
+          createCompletions()
+        })
+        .on('check',function(check) { })
+        .on('error',function(msg) {})
+
+      function createCompletions() {
+        var html = ''
+        if( currentMatch ) {
+          if( currentMatch.type === 'username' ) {
+            var html = ''
+            html += '<li><a href="javascript:void(0)">@handle1</a></li>'
+            html += '<li><a href="javascript:void(0)">@handle2</a></li>'
+            html += '<li><a href="javascript:void(0)">@handle3</a></li>'
+          } else if( currentMatch.type === 'hashtag' ) {
+            html += '<li><a href="javascript:void(0)">#hashtag1</a></li>'
+            html += '<li><a href="javascript:void(0)">#hashtag2</a></li>'
+            html += '<li><a href="javascript:void(0)">#hashtag3</a></li>'
+          }
+        }
+        $('#completions').html(html)
+      }
+
+      $('#completions').on('click','li a',function() {
+        console.log('replace match',currentMatch,$(this).html())
+        completer.replaceMatch(currentMatch, $(this).html())
+      })
+
+    })
+  </script>
+</head>
+<body>
+  <textarea
+    id="input"
+    placeholder="Type some text with a @usernames and #hashtags"
+    rows="10"
+    cols="70"
+  ></textarea>
+  <p><b>Match:</b> <span id="match"></span></p>
+  <p><b>Match type:</b> <span id="matchtype"></span></p>
+
+  <p>
+    <b>Completions:</b>
+    <ul id="completions"></ul>
+  </p>
+
+</body>
+</html>

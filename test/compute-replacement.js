@@ -6,7 +6,7 @@ var computeReplacement = require('../lib/compute-replacement')
 
 describe('computeReplacement', function () {
   it('replaces a match', function () {
-    var replaced = computeReplacement('test @firstname more text', 6, 'firstname'.length, 'newname')
+    var replaced = computeReplacement('test @firstname more text', 6, 6 + 'firstname'.length, 'newname')
     assert.deepEqual(replaced, {
       text: 'test @newname  more text',
       selectionRange: {

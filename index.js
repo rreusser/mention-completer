@@ -15,7 +15,7 @@ function MentionCompleter (options) {
   this.setValue = options.setValue
 
   this.on('replace', function (replacement) {
-    this._setValueAsync(replacement.value)
+    this._setValueAsync(replacement.text)
     this._setSelectionRangeAsync(replacement.selectionRange)
   })
 

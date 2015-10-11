@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha test/*",
-    "bundle": "browserify index.js -o dist/bundle.js"
+    "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js"
   },
   "keywords": [
     "autocomplete",
