@@ -21,7 +21,7 @@ $ npm install mention-completer
 
 ## Example
 
-For a live HTML-based example, see [here](http://rreusser.github.io/mention-completer/example)
+For a live HTML-based example, see [here](http://rreusser.github.io/mention-completer/example). Note that the code consists almost entirely of connecting the text field.
 
 [![HTML Screenshot](example/screenshot.png)](http://rreusser.github.io/mention-completer/example)
 
