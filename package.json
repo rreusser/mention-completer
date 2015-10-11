@@ -1,11 +1,15 @@
 {
   "name": "mention-completer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A platform-independent library for managing mention-like completion",
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha test/*",
     "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rreusser/mention-completer.git"
   },
   "keywords": [
     "autocomplete",
