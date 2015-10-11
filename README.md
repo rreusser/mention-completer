@@ -26,11 +26,11 @@ For a live HTML-based example, see [here](http://rreusser.github.io/mention-comp
 var MentionCompleter = require('mention-completer')
 
 var completer = new MentionCompleter({
-  patterns: { handle: /(@[\w]+)\b/, hashtag: /(\#[\w]+\b/ },
-  getSelectionRange: function() { },
-  setSelectionRange: function() { },
-  getValue: function() { },
-  setValue: function() { }
+  patterns: { handle: /(@[\w]+)\b/, hashtag: /(#[\w]+)\b/ },
+  getSelectionRange: ...,
+  setSelectionRange: ...,
+  getValue: ...,
+  setValue: ...
 })
   
 completer
