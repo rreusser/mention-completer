@@ -113,7 +113,23 @@ Along with all other `EventEmitter` methods, `on` may be used to hook into any e
 
 - **`replace`**: Triggered when `replaceWith` is explicitly called. `data` contains the computed replacement, `{text, selectionRange:{start,end}}` where `text` contains the text with replacement, and `selectionRange` contains the post-replacement selection range. If provided, `setSelectionRange` and `setValue` will update the input value.
 
+## Testing
+
+This module uses Standard JS style. To test, run
+
+```bash
+$ npm run test
+```
+
+## Building
+
+To bundle a browserified (output in `dist/bundle.js`), run
+
+```bash
+$ npm install -g browserify
+$ npm run bundle
+```
 
 ## License
 
-MIT License, (c) 2015 Ricky Reusser
+ISC License, (c) 2015 Ricky Reusser

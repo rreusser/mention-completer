@@ -2,11 +2,11 @@
 'use strict'
 
 var assert = require('chai').assert
-var replace = require('../lib/replace-match')
+var computeReplacement = require('../lib/compute-replacement')
 
-describe('replaceMatch', function () {
+describe('computeReplacement', function () {
   it('replaces a match', function () {
-    var replaced = replace('test @firstname more text', 6, 'firstname'.length, 'newname')
+    var replaced = computeReplacement('test @firstname more text', 6, 'firstname'.length, 'newname')
     assert.deepEqual(replaced, {
       text: 'test @newname  more text',
       selectionRange: {
