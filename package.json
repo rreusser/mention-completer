@@ -4,7 +4,7 @@
   "description": "Handles the messy internals with which you might autocomplete usernames and hashtags",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*",
+    "test": "standard && mocha test/*",
     "build": "browserify index.js -o dist/bundle.js"
   },
   "keywords": [
@@ -17,7 +17,8 @@
   "devDependencies": {
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
-    "sinon": "^1.17.1"
+    "sinon": "^1.17.1",
+    "standard": "^5.3.1"
   },
   "dependencies": {
     "assert": "^1.3.0",
