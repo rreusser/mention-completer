@@ -20,7 +20,7 @@ $ npm install mention-completer
 
 For a live HTML-based example, see [here](http://rreusser.github.io/mention-completer/example)
 
-![HTML Screenshot](example/screenshot.png)
+[![HTML Screenshot](example/screenshot.png)](http://rreusser.github.io/mention-completer/example)
 
 ```javascript
 var MentionCompleter = require('mention-completer')
