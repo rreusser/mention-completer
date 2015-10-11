@@ -1,6 +1,9 @@
 # mention-completer
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+[![Build Status](https://travis-ci.org/rreusser/mention-completer.svg?branch=master)](https://travis-ci.org/rreusser/mention-completer)
+[![npm version](https://badge.fury.io/js/mention-completer.svg)](https://badge.fury.io/js/mention-completer)
+[![Dependency Status](https://david-dm.org/rreusser/mention-completer.svg)](https://david-dm.org/rreusser/mention-completer)
 
 > A platform-independent library for managing mention-like completion
 
