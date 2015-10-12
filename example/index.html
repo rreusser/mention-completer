@@ -29,7 +29,10 @@
         }
       })
 
-      $input.on('keyup', completer.checkForMatch.bind(completer) )
+      $input.on('focus mousedown keyup select',function() {
+        // Because selection range is outdated on mousedown:
+        setTimeout(completer.checkForMatch.bind(completer))
+      })
 
       completer
         .on('match',function(match) {
