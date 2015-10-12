@@ -27,8 +27,8 @@ function detectMatch (string, selectionStart, selectionEnd, patterns) {
 
   // Take one extra character so that we can check for
   // word boundaries but still anchor to the end of the string:
-  part = string.substr(0,selectionEnd+1)
-  if( part.length <= selectionEnd ) {
+  part = string.substr(0, selectionEnd + 1)
+  if (part.length <= selectionEnd) {
     part += ' '
   }
 
@@ -399,6 +399,7 @@ function MentionCompleter (options) {
   this.setSelectionRange = options.setSelectionRange
   this.getValue = options.getValue
   this.setValue = options.setValue
+  this.mostRecentMatch = null
 
   this.on('replace', function (replacement) {
     this._setValueAsync(replacement.text)
@@ -406,13 +407,14 @@ function MentionCompleter (options) {
   })
 
   this.on('check', function (state) {
-    var match = detectMatch(state.value, state.range.start, state.range.end, this.patterns)
+    this.mostRecentMatch = detectMatch(state.value, state.range.start, state.range.end, this.patterns)
 
-    if (match) {
+    if (this.mostRecentMatch) {
       this.emit('match', match)
     } else {
       this.emit('nomatch')
     }
+    console.log('this=',this)
   }.bind(this))
 }
 

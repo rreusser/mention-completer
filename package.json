@@ -1,11 +1,12 @@
 {
   "name": "mention-completer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A platform-independent library for managing mention-like completion",
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha test/*",
-    "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js"
+    "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js",
+    "example": "npm run bundle && cp dist/bundle.js example/ && python -m SimpleHTTPServer"
   },
   "repository": {
     "type": "git",

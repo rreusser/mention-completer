@@ -85,6 +85,9 @@ patterns: {
 
  - **`setSelectionRange`**: `function( {start, end} )` (optional): A callback that sets the selection range. If provided, is automatically called on each `replace` event.
 
+### Properties
+ - `.mostRecentMatch`: the most recent match. If no match is present, equal to `null`.
+
 ### Methods
 
 #### `.checkForMatch()`

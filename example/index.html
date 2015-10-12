@@ -6,7 +6,6 @@
   <script>
     $(function() {
 
-      var currentMatch
       var $input = $('#input')
 
       var completer = new MentionCompleter({
@@ -34,13 +33,11 @@
 
       completer
         .on('match',function(match) {
-          currentMatch = match
           $('#match').text(match.value)
           $('#matchtype').text(match.type)
           createCompletions()
         })
         .on('nomatch',function() {
-          currentMatch = null
           $('#match').text('')
           $('#matchtype').text('')
           createCompletions()
@@ -50,13 +47,13 @@
 
       function createCompletions() {
         var html = ''
-        if( currentMatch ) {
-          if( currentMatch.type === 'username' ) {
+        if( completer.mostRecentMatch ) {
+          if( completer.mostRecentMatch.type === 'username' ) {
             var html = ''
             html += '<li><a href="javascript:void(0)">@handle1</a></li>'
             html += '<li><a href="javascript:void(0)">@handle2</a></li>'
             html += '<li><a href="javascript:void(0)">@handle3</a></li>'
-          } else if( currentMatch.type === 'hashtag' ) {
+          } else if( completer.mostRecentMatch.type === 'hashtag' ) {
             html += '<li><a href="javascript:void(0)">#hashtag1</a></li>'
             html += '<li><a href="javascript:void(0)">#hashtag2</a></li>'
             html += '<li><a href="javascript:void(0)">#hashtag3</a></li>'
@@ -66,8 +63,7 @@
       }
 
       $('#completions').on('click','li a',function() {
-        console.log('replace match',currentMatch,$(this).html())
-        completer.replaceMatch(currentMatch, $(this).html())
+        completer.replaceMatch(completer.mostRecentMatch, $(this).html())
       })
 
     })
