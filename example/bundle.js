@@ -56,23 +56,6 @@ function detectMatch (string, selectionStart, selectionEnd, patterns) {
 module.exports = detectMatch
 
 },{}],3:[function(require,module,exports){
-module.exports = extend
-
-function extend(target) {
-    for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (source.hasOwnProperty(key)) {
-                target[key] = source[key]
-            }
-        }
-    }
-
-    return target
-}
-
-},{}],4:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -375,11 +358,10 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict'
 
 var EventEmitter = require('events').EventEmitter
-var extend = require('xtend/mutable')
 var detectMatch = require('./lib/detect-match')
 var computeReplacement = require('./lib/compute-replacement')
 
@@ -474,5 +456,5 @@ MentionCompleter.prototype.replaceMatch = function (match, text) {
 
 module.exports = MentionCompleter
 
-},{"./lib/compute-replacement":1,"./lib/detect-match":2,"events":4,"xtend/mutable":3}]},{},[5])(5)
+},{"./lib/compute-replacement":1,"./lib/detect-match":2,"events":3}]},{},[4])(4)
 });

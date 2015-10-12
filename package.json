@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha test/*",
-    "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js",
+    "browserify": "browserify index.js -s MentionCompleter -o dist/bundle.js",
     "uglify": "./node_modules/.bin/uglifyjs dist/bundle.js > dist/bundle.min.js",
-    "bundle-example": "npm run bundle && cp dist/bundle.js example/",
-    "build": "npm run bundle-example && npm run uglify",
-    "example": "python -m SimpleHTTPServer"
+    "bundle": "npm run browserify && npm run uglify&& cp dist/bundle.js example/",
+    "example": "npm run bundle && python -m SimpleHTTPServer"
   },
   "repository": {
     "type": "git",
@@ -31,7 +30,6 @@
     "uglify-js": "^2.5.0"
   },
   "dependencies": {
-    "events": "^1.1.0",
-    "xtend": "^4.0.0"
+    "events": "^1.1.0"
   }
 }

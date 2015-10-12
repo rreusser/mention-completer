@@ -8,39 +8,34 @@
       var $input = $('#input')
 
       var completer = new MentionCompleter({
-        patterns: {
-          username: /(@[\w]+)\b/,
-          hashtag: /(#[\w]+)\b/
-        },
-        getValue: function (cb) {
-          cb(null, $input.val())
-        },
-        setValue: function (value) {
-          $input.focus()
-          $input.val(value)
-          completer.checkForMatch()
-        },
-        getSelectionRange: function (cb) {
-          cb(null, {
-            start: $input[0].selectionStart,
-            end: $input[0].selectionEnd
-          })
-        },
-        setSelectionRange: function (range) {
-          $input[0].setSelectionRange(range.start, range.end)
-        }
-      })
-
-      // setTimeout because selection range is outdated on mousedown:
-      $input.on('mousedown keyup select', function () {
-        setTimeout(completer.checkForMatch.bind(completer))
-      })
-
-      completer
+          patterns: {
+            username: /(@[\w]+)\b/,
+            hashtag: /(#[\w]+)\b/
+          },
+          getValue: function (cb) {
+            cb(null, $input.val())
+          },
+          setValue: function (value) {
+            $input.focus()
+            $input.val(value)
+            completer.checkForMatch()
+          },
+          getSelectionRange: function (cb) {
+            cb(null, {
+              start: $input[0].selectionStart,
+              end: $input[0].selectionEnd
+            })
+          },
+          setSelectionRange: function (range) {
+            $input[0].setSelectionRange(range.start, range.end)
+          }
+        })
         .on('nomatch', createMatchUI)
         .on('match', function (match) {
           createMatchUI(match.value, match.type)
         })
+
+      $input.on('mouseup keyup select', completer.checkForMatch.bind(completer))
 
       $('#completions').on('click','li a', function () {
         completer.replaceMatch(completer.mostRecentMatch, $(this).html())
@@ -51,16 +46,13 @@
         $('#matchtype').text(type || '')
         var html = ''
         if (value && type ) {
-          if (type === 'username') {
-            var html = ''
-            html += '<li><a href="javascript:void(0)">@handle1</a></li>'
-            html += '<li><a href="javascript:void(0)">@handle2</a></li>'
-            html += '<li><a href="javascript:void(0)">@handle3</a></li>'
-          } else if (type === 'hashtag') {
-            html += '<li><a href="javascript:void(0)">#hashtag1</a></li>'
-            html += '<li><a href="javascript:void(0)">#hashtag2</a></li>'
-            html += '<li><a href="javascript:void(0)">#hashtag3</a></li>'
-          }
+          html = [1,2,3].reduce(function(str,i) {
+            return str +
+              '<li><a href="javascript:void(0)">' +
+                (type==='username' ? '@handle' : '#hashtag') +
+                i +
+              '</a></li>'
+          },'')
         }
         $('#completions').html(html)
       }

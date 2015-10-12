@@ -115,13 +115,15 @@ mention.replaceMatch(currentMatch, '@suggestedname')
 Along with all other `EventEmitter` methods, `on` may be used to hook into any event. Note that these events are used internally so that `.off` may break functionality unless only a specific callback is detached.
 
 ### Events
-- **`error`**: Triggered when something goes wrong. `data` contains a string message.
+- **`check`**: Triggered just before the field is checked for a match. `data` contains `{value, range:{start,end}}` where `value` is the queried value of the input and `range` is the queried selection range.
 
 - **`match`**: Triggered when a completable match is detected. `data` contains `{string, value, type, range:{start,end}}` where `string` is the matched string, `value` is the match captured by the regex, type is the key of the pattern that was matched, and `range` contains the integer range of `value` within `string`.
 
-- **`check`**: Triggered when a match is found. `data` contains `{value, range:{start,end}}` where `value` is the queried value of the input and `range` is the queried selection range.
+- **`nomatch`**: Triggered when no completable match is detected. Perhaps a good place to trigger closing of a suggestion menu.
 
 - **`replace`**: Triggered when `replaceWith` is explicitly called. `data` contains the computed replacement, `{text, selectionRange:{start,end}}` where `text` contains the text with replacement, and `selectionRange` contains the post-replacement selection range. If provided, `setSelectionRange` and `setValue` will update the input value.
+
+- **`error`**: Triggered when something goes wrong. `data` contains a string message.
 
 ## Testing
 
