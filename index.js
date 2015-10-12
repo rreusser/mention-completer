@@ -24,7 +24,7 @@ function MentionCompleter (options) {
     this.mostRecentMatch = detectMatch(state.value, state.range.start, state.range.end, this.patterns)
 
     if (this.mostRecentMatch) {
-      this.emit('match', match)
+      this.emit('match', this.mostRecentMatch)
     } else {
       this.emit('nomatch')
     }

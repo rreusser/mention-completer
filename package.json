@@ -1,6 +1,6 @@
 {
   "name": "mention-completer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A platform-independent library for managing mention-like completion",
   "main": "index.js",
   "scripts": {
