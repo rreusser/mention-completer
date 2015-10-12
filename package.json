@@ -6,6 +6,8 @@
   "scripts": {
     "test": "standard && mocha test/*",
     "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js",
+    "uglify": "./node_modules/.bin/uglifyjs dist/bundle.js > dist/bundle.min.js",
+    "build": "npm run bundle && npm run uglify",
     "example": "npm run bundle && cp dist/bundle.js example/ && python -m SimpleHTTPServer"
   },
   "repository": {
@@ -24,7 +26,8 @@
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "sinon": "^1.17.1",
-    "standard": "^5.3.1"
+    "standard": "^5.3.1",
+    "uglify-js": "^2.5.0"
   },
   "dependencies": {
     "events": "^1.1.0",
