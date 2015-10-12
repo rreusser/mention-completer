@@ -8,7 +8,8 @@
       var $input = $('#input')
 
       var completer = new MentionCompleter({
-        patterns: { username: /(@[\w]+)\b/,
+        patterns: {
+          username: /(@[\w]+)\b/,
           hashtag: /(#[\w]+)\b/
         },
         getValue: function (cb) {
