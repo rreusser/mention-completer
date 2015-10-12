@@ -4,59 +4,58 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="./bundle.js"></script>
   <script>
-    $(function() {
-
+    $(function () {
       var $input = $('#input')
 
       var completer = new MentionCompleter({
-        patterns: {
-          username: /(@[\w]+)\b/,
+        patterns: { username: /(@[\w]+)\b/,
           hashtag: /(#[\w]+)\b/
         },
-        getValue: function(cb) {
+        getValue: function (cb) {
           cb(null, $input.val())
         },
-        setValue: function(value) {
+        setValue: function (value) {
           $input.focus()
           $input.val(value)
-          $input.trigger('keyup')
+          completer.checkForMatch()
         },
-        getSelectionRange: function(cb) {
-          cb(null, {start: $input[0].selectionStart, end: $input[0].selectionEnd})
+        getSelectionRange: function (cb) {
+          cb(null, {
+            start: $input[0].selectionStart,
+            end: $input[0].selectionEnd
+          })
         },
-        setSelectionRange: function(range) {
+        setSelectionRange: function (range) {
           $input[0].setSelectionRange(range.start, range.end)
         }
       })
 
-      $input.on('focus mousedown keyup select',function() {
-        // Because selection range is outdated on mousedown:
+      // setTimeout because selection range is outdated on mousedown:
+      $input.on('mousedown keyup select', function () {
         setTimeout(completer.checkForMatch.bind(completer))
       })
 
       completer
-        .on('match',function(match) {
-          $('#match').text(match.value)
-          $('#matchtype').text(match.type)
-          createCompletions()
+        .on('nomatch', createMatchUI)
+        .on('match', function (match) {
+          createMatchUI(match.value, match.type)
         })
-        .on('nomatch',function() {
-          $('#match').text('')
-          $('#matchtype').text('')
-          createCompletions()
-        })
-        .on('check',function(check) { })
-        .on('error',function(msg) {})
 
-      function createCompletions() {
+      $('#completions').on('click','li a', function () {
+        completer.replaceMatch(completer.mostRecentMatch, $(this).html())
+      })
+
+      function createMatchUI(value, type) {
+        $('#match').text(value || '')
+        $('#matchtype').text(type || '')
         var html = ''
-        if( completer.mostRecentMatch ) {
-          if( completer.mostRecentMatch.type === 'username' ) {
+        if (value && type ) {
+          if (type === 'username') {
             var html = ''
             html += '<li><a href="javascript:void(0)">@handle1</a></li>'
             html += '<li><a href="javascript:void(0)">@handle2</a></li>'
             html += '<li><a href="javascript:void(0)">@handle3</a></li>'
-          } else if( completer.mostRecentMatch.type === 'hashtag' ) {
+          } else if (type === 'hashtag') {
             html += '<li><a href="javascript:void(0)">#hashtag1</a></li>'
             html += '<li><a href="javascript:void(0)">#hashtag2</a></li>'
             html += '<li><a href="javascript:void(0)">#hashtag3</a></li>'
@@ -64,11 +63,6 @@
         }
         $('#completions').html(html)
       }
-
-      $('#completions').on('click','li a',function() {
-        completer.replaceMatch(completer.mostRecentMatch, $(this).html())
-      })
-
     })
   </script>
 </head>
