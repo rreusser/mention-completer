@@ -5,11 +5,11 @@
 [![npm version](https://badge.fury.io/js/mention-completer.svg)](https://badge.fury.io/js/mention-completer)
 [![Dependency Status](https://david-dm.org/rreusser/mention-completer.svg)](https://david-dm.org/rreusser/mention-completer)
 
-> A platform-independent library for managing mention-like completion
+> A UI-platform-independent module for managing mention-like completion
 
 ## Introduction
 
-This library implements an `EventEmitter` object which uses provided regexes to detect and replace @username- or #hashtag-like patterns in a (platform-independent) input field. The entity it interacts with must only have a value, a selection range, and presumably its own UI with which the user may select a completion.
+This module implements an `EventEmitter` object which uses provided regexes to detect and replace @username- or #hashtag-like patterns in a (platform-independent) input field. The entity it interacts with must only have a value, a selection range, and presumably its own UI with which the user may select a completion.
 
 It exists because I found myself working with React Native, implementing the gory details of mention detection and replacement. There's no shortage of HTML-based UI widgets that implement mention detection and completion, but all I needed was a platform-independent utility that would handle the dirty work, leaving me free to hook up the rest trivially.
 

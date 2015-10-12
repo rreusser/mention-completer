@@ -1,7 +1,7 @@
 {
   "name": "mention-completer",
-  "version": "1.0.5",
-  "description": "A platform-independent library for managing mention-like completion",
+  "version": "1.0.6",
+  "description": "A UI-platform-independent library for managing mention-like completion",
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha test/*",
