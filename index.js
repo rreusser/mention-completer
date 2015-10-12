@@ -1,7 +1,6 @@
 'use strict'
 
 var EventEmitter = require('events').EventEmitter
-var inherits = require('inherits')
 var detectMatch = require('./lib/detect-match')
 var computeReplacement = require('./lib/compute-replacement')
 
@@ -31,7 +30,7 @@ function MentionCompleter (options) {
   }.bind(this))
 }
 
-inherits(MentionCompleter, EventEmitter)
+MentionCompleter.prototype = Object.create(EventEmitter.prototype)
 
 MentionCompleter.prototype._error = function (msg) {
   this.emit('error', msg)

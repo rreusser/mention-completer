@@ -7,8 +7,9 @@
     "test": "standard && mocha test/*",
     "bundle": "browserify index.js -s MentionCompleter -o dist/bundle.js",
     "uglify": "./node_modules/.bin/uglifyjs dist/bundle.js > dist/bundle.min.js",
-    "build": "npm run bundle && npm run uglify",
-    "example": "npm run bundle && cp dist/bundle.js example/ && python -m SimpleHTTPServer"
+    "bundle-example": "npm run bundle && cp dist/bundle.js example/",
+    "build": "npm run bundle-example && npm run uglify",
+    "example": "python -m SimpleHTTPServer"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,6 @@
   },
   "dependencies": {
     "events": "^1.1.0",
-    "inherits": "^2.0.1"
+    "xtend": "^4.0.0"
   }
 }

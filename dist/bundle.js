@@ -56,28 +56,20 @@ function detectMatch (string, selectionStart, selectionEnd, patterns) {
 module.exports = detectMatch
 
 },{}],3:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
+module.exports = extend
+
+function extend(target) {
+    for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
 }
 
 },{}],4:[function(require,module,exports){
@@ -387,7 +379,7 @@ function isUndefined(arg) {
 'use strict'
 
 var EventEmitter = require('events').EventEmitter
-var inherits = require('inherits')
+var extend = require('xtend/mutable')
 var detectMatch = require('./lib/detect-match')
 var computeReplacement = require('./lib/compute-replacement')
 
@@ -417,7 +409,7 @@ function MentionCompleter (options) {
   }.bind(this))
 }
 
-inherits(MentionCompleter, EventEmitter)
+MentionCompleter.prototype = Object.create(EventEmitter.prototype)
 
 MentionCompleter.prototype._error = function (msg) {
   this.emit('error', msg)
@@ -482,5 +474,5 @@ MentionCompleter.prototype.replaceMatch = function (match, text) {
 
 module.exports = MentionCompleter
 
-},{"./lib/compute-replacement":1,"./lib/detect-match":2,"events":4,"inherits":3}]},{},[5])(5)
+},{"./lib/compute-replacement":1,"./lib/detect-match":2,"events":4,"xtend/mutable":3}]},{},[5])(5)
 });

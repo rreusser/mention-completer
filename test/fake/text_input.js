@@ -1,7 +1,6 @@
 'use strict'
 
 var EventEmitter = require('events').EventEmitter
-var inherits = require('inherits')
 
 var CALLBACK_DELAY = 5
 
@@ -13,7 +12,7 @@ function TextInput (value) {
   this.selectionEnd = this.value.length
 }
 
-inherits(TextInput, EventEmitter)
+TextInput.prototype = Object.create(EventEmitter.prototype)
 
 TextInput.prototype.enter = function (text) {
   var start = this.value.substr(0, this.selectionStart)
