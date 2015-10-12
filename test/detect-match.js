@@ -24,6 +24,19 @@ describe('detectMatch', function () {
     })
   })
 
+  it("trailing space doesn't prevent match if cursor not at end", function () {
+    var match = detect('@name ', 5, 5, patterns)
+    assert.deepEqual(match, {
+      string: '@name ',
+      value: '@name',
+      type: 'handle',
+      range: {
+        start: 0,
+        end: 5
+      }
+    })
+  })
+
   it('matches a hashtag', function () {
     var match = detect('#tag', 4, 4, patterns)
     assert.deepEqual(match, {
@@ -36,7 +49,6 @@ describe('detectMatch', function () {
       }
     })
   })
-
   it('trailing space prevents match', function () {
     var match = detect('@name ', 6, 6, patterns)
     assert.equal(match, null)
